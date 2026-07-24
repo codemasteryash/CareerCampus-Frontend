@@ -7,13 +7,13 @@ import RegisterPage from './pages/RegisterPage'
 import DashboardPage from './pages/DashboardPage'
 import ProfilePage from './pages/ProfilePage'
 import SkillsPage from './pages/SkillsPage'
-// import RolesPage from './pages/RolesPage'
+import RolesPage from './pages/RolesPage'
 import ResumePage from './pages/ResumePage'
 import AnalysisPage from './pages/AnalysisPage'
 import RoadmapPage from './pages/RoadmapPage'
 import CertificationsPage from './pages/CertificationsPage'
-// import ProjectsPage from './pages/ProjectsPage'
-// import MentorPage from './pages/MentorPage'
+import ProjectsPage from './pages/ProjectsPage'
+import MentorPage from './pages/MentorPage'
 
 import Layout from './components/layout/Layout'
 import ProtectedRoute from './components/shared/ProtectedRoute'
@@ -38,13 +38,13 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/skills" element={<SkillsPage />} />
-          {/* <Route path="/roles" element={<RolesPage />} /> */}
+          <Route path="/roles" element={<RolesPage />} />
           <Route path="/resume" element={<ResumePage />} />
           <Route path="/analysis" element={<AnalysisPage />} />
           <Route path="/roadmap" element={<RoadmapPage />} />
           <Route path="/certifications" element={<CertificationsPage />} />
-          {/* <Route path="/projects" element={<ProjectsPage />} /> */}
-          {/* <Route path="/mentor" element={<MentorPage />} /> */}
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/mentor" element={<MentorPage />} />
         </Route>
       </Route>
 

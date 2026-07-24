@@ -1,4 +1,4 @@
 import api from '../axios'
-export const projectApi = {
-  getRecommendations: () => api.get('/projects/recommendations'),
+export const analysisApi = {
+  getAnalysis: () => api.get('/analysis'),
 }
