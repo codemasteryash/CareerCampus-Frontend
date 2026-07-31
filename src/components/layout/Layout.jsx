@@ -70,32 +70,32 @@ import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 
 export default function Layout() {
-  // Desktop: open by default. Mobile: closed by default.
   const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024)
 
-  // Close sidebar automatically when screen shrinks to mobile
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1024) {
+      if (window.innerWidth >= 1024) {
+        setSidebarOpen(true)
+      } else {
         setSidebarOpen(false)
       }
     }
+
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   return (
     <div className="min-h-screen bg-[#080c14] flex flex-col">
-      {/* Background glow */}
+
+      {/* Background */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-blue-600/10 blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] rounded-full bg-cyan-500/10 blur-[100px]" />
       </div>
 
-      {/* Navbar — passes toggle so hamburger works */}
-      <Navbar onToggleSidebar={() => setSidebarOpen(prev => !prev)} />
+      <Navbar />
 
-      {/* Main layout */}
       <div className="flex flex-1 relative z-10 overflow-hidden">
 
         {/* Sidebar */}
@@ -104,20 +104,36 @@ export default function Layout() {
           onClose={() => setSidebarOpen(false)}
         />
 
-        {/* Desktop collapse rail — HIDDEN on mobile */}
-        <div className="hidden lg:flex w-12 bg-[#0a0f1a] border-r border-[#1e2d45] justify-center pt-4 shrink-0">
+        {/* Hamburger Rail */}
+        <div
+          className={`
+            ${
+              sidebarOpen
+                ? 'hidden lg:flex'
+                : 'flex'
+            }
+            w-12
+            shrink-0
+            bg-[#0a0f1a]
+            border-r
+            border-[#1e2d45]
+            justify-center
+            pt-4
+            z-30
+          `}
+        >
           <button
-            onClick={() => setSidebarOpen(prev => !prev)}
-            className="h-9 w-9 rounded-lg flex items-center justify-center text-[#94a3b8] hover:bg-[#141d2e] hover:text-white transition-all duration-200"
+            onClick={() => setSidebarOpen(true)}
+            className="h-9 w-9 rounded-lg flex items-center justify-center text-[#94a3b8] hover:bg-[#141d2e] hover:text-white transition-all"
           >
-            {sidebarOpen ? <PanelLeftClose size={20} /> : <PanelLeftOpen size={20} />}
+            <PanelLeftOpen size={20} />
           </button>
         </div>
 
-        {/* Page content */}
         <main className="flex-1 overflow-auto p-4 lg:p-6">
           <Outlet />
         </main>
+
       </div>
     </div>
   )
